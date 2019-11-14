@@ -41,19 +41,7 @@ export default {
      ** Axios module configuration
      ** See https://axios.nuxtjs.org/options
      */
-    axios: {
-        proxy: true
-    },
-    proxy: {
-        '/apis': {
-            // 测试环境
-            target: 'http://192.168.14.42:9994/', // 接口域名
-            changeOrigin: true, //是否跨域
-            pathRewrite: {
-                '^/apis': '' //需要rewrite重写的,
-            }
-        }
-    },
+
     /*
      ** Build configuration
      */
