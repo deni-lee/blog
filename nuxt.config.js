@@ -12,7 +12,10 @@ export default {
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-        ]
+        ],
+        script: [{
+            src: 'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js'
+        }]
     },
     /*
      ** Customize the progress-bar color
@@ -47,7 +50,7 @@ export default {
     proxy: {
         '/apis': {
             // 测试环境
-            target: 'http://192.168.14.42:9994/', // 接口域名
+            target: 'http://192.168.14.42:9990/', // 接口域名
             changeOrigin: true, //是否跨域
             pathRewrite: {
                 '^/apis': '' //需要rewrite重写的,
