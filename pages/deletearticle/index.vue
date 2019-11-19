@@ -9,7 +9,7 @@
 
         <div class="sidebar_left">
             <p><a href="/article" class="new">新增文章</a> </p>
-            <p><a href="/deletearticle" class="now">刪除文章</a></p>
+            <p><a href="/deletearticle" class="now">文章編輯</a></p>
             <ul>
                 <li class="typelist" @click= "allarticle">全部</li>
                 <li class="typelist" v-for="(type,index) in type" :key="index" value="index" @click= "read(index)">{{ type.name }}</li>

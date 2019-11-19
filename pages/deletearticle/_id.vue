@@ -7,22 +7,16 @@
     
     <div class="content">
 
-        <div class="sidebar_left">
-            <p><a href="/article" class="new">新增文章</a> </p>
-            <p><a href="/deletearticle" class="now">刪除文章</a></p>
-            <ul>
-                <li class="typelist" @click= "allarticle">全部</li>
-                <li class="typelist" v-for="(type,index) in type" :key="index" value="index" @click= "read(index)">{{ type.name }}</li>
-            </ul>
-            <p><a href="/newtype" class="new">新增分類</a> </p>
-        </div>
-
-        <div class="sidebar_right" v-for="(article,index) in article" :key="index" value="index">
-
-            <input type="text" class="titlepatch" v-model= "article.title">
+        <div  v-for="(article,index) in article" :key="index+2" :value="index+2" style="margin-top:30px;">
             
-            <textarea class="contentpatch" cols="100" rows="35" v-model="article.content"></textarea>
+            <input type="text" class="titlepatch" v-model= "article.title">
+
+            <textarea class="contentpatch" cols="100" rows="35" v-model="article.content"></textarea> <br>
+            <textarea class="contentpatch" cols="30" rows="2" v-model="article.image"></textarea>
+            <textarea class="contentpatch" cols="30" rows="2" v-model="article.remark"></textarea>
+            
             <button class="submit" @click="submithandler(index)"> 修改 </button>
+            <button class="submit" @click="back"> 返回 </button>
 
         </div>
         
@@ -59,6 +53,9 @@ export default {
             }).catch((err)=>{
                 console.log(err)
             })
+        },
+        back(){
+            window.history.back();
         }
     },
     mounted(){
@@ -166,7 +163,6 @@ p{
     font-size: 15px;
 }
 .submit{
-    float: left;
     border-radius: 15%;
     margin: 10px;
     z-index: 1;

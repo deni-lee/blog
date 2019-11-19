@@ -9,7 +9,7 @@
 
         <div class="sidebar_left">
             <p><a href="/article" class="now">新增文章</a> </p>
-            <p><a href="/deletearticle" class="new">刪除文章</a></p>
+            <p><a href="/deletearticle" class="new">文章編輯</a></p>
             <p><a href="/newtype" class="new">新增分類</a> </p>
         </div>
 
@@ -18,7 +18,7 @@
                 <input type="text" class="title" placeholder="標題" v-model= "input.title">
                 
             <select v-model= "input.category_id">
-                    <option v-for="(item, index) in type" :key="index+2" :value="index+2">{{ item.name }}-{{index+2}}</option>
+                    <option v-for="(item, index) in type" :key="index+2" :value="index+2">{{ item.name }}</option>
                     
                 </select>
             </div>
