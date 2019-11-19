@@ -60,11 +60,19 @@ export default {
                     alert(`${res.data.value}`)
                 }else{
                     alert('新增成功')
+                    this.clear()
                 }
             }).catch((err)=>{
                 console.log(err)
             })
         },
+        clear(){
+            this.input.title='',
+            this.input.image='',
+            this.input.remark='',
+            this.input.category_id='',
+            this.input.content=''
+        }
         
     },
     mounted(){

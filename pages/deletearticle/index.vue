@@ -76,6 +76,7 @@ export default {
                         alert(`${this.errorbox}`)
                     }else if(res.data.status === '000000'){
                         alert(`刪除成功`)
+                        location.reload()
                     }
                 }).catch((err)=>{
                     console.log(err)
@@ -89,6 +90,7 @@ export default {
                         alert(`res.data.value`)
                     }else if(res.data.status === '000000'){
                         alert(`刪除成功`)
+                        location.reload()
                     }
                 }).catch((err)=>{
                     console.log(err)
