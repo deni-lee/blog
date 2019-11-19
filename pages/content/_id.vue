@@ -24,6 +24,8 @@
 
                 <div style="margin-top:30px; ">
                     <p class="Commenttitle">評論</p>
+                        <textarea cols="50" rows="4" placeholder="新增評論" class="newcomment"></textarea>
+                        <button class="commentsubmit">送出</button>
                         <p class="comment" v-for="(comment,index) in comment" :key="index" value="index">{{ comment.content }}</p>
                 </div>
             </div>
@@ -165,5 +167,32 @@ export default {
     margin-top: 20px;
     font-size: 15px;
 }
-
+.commentsubmit{
+    margin: 10px;
+    z-index: 1;
+    font-size: 10px;
+    font-family: inherit;
+    color: white;
+    padding: 0.5em 1em;
+    outline: none;
+    border: none;
+    background-color: #708090 ;}
+.commentsubmit:active{
+    animation: jelly 0.5s;
+}
+@keyframes jelly {
+    0%,
+    100% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(0.9, 1.1);
+    }
+    50% {
+        transform: scale(1.1, 0.9);
+    }
+    75% {
+        transform: scale(0.95, 1.05);
+    }
+}
 </style>
