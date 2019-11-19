@@ -24,7 +24,7 @@
 
                 <div style="margin-top:30px; ">
                     <p class="Commenttitle">評論</p>
-                        <textarea cols="50" rows="4" placeholder="新增評論" class="newcomment"></textarea>
+                        <textarea cols="50" rows="4" placeholder="新增評論" class="newcomment" ></textarea>
                         <button class="commentsubmit">送出</button>
                         <p class="comment" v-for="(comment,index) in comment" :key="index" value="index">{{ comment.content }}</p>
                 </div>
