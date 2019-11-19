@@ -10,23 +10,21 @@
 
             <div class="sidebar_left">
                 <p class="typetitle">文章分類</p> 
-                <ul  v-for= "(item,index) in type" >
-                <li class="typelist" @click= "read(index)">{{ item.name }}</li>
+                <ul>
+                    <li class="typelist" @click= "back">全部分類</li>
+                    <li class="typelist" v-for= "(item,index) in type" :key="index" value="index" @click= "read(index)">{{ item.name }}</li>
                 </ul>
             </div>
 
             <div class="sidebar_right">
-                <div v-for="item in content" >
+                <div v-for="(item,index) in content" :key="index" value="index">
                     <p class="title" >{{ item.title }}</p> <br>
                     <p class="articlecontent" >{{ item.content }}</p>
                 </div>
 
                 <div style="margin-top:30px; ">
-                    <p class="Commenttitle">評論
-                        <span @click="commentnew">新增評論</span>
-                    </p>
-                        <Input type="text" placeholder="新增評論" v-if="newcomment === '1'"></Input>
-                        <p class="comment" v-for="comment in comment" >{{ comment.content }}</p>
+                    <p class="Commenttitle">評論</p>
+                        <p class="comment" v-for="(comment,index) in comment" :key="index" value="index">{{ comment.content }}</p>
                 </div>
             </div>
 
@@ -43,16 +41,16 @@ export default {
             type:[],
             comment:[],
             article:[],
-            newcomment:null
         }
     },
     methods:{
         read(index){
             window.location.href='/type/'+this.type[index].category_id
         },
-        commentnew(){
-            this.newcomment='1'
+        back(){
+            window.location.href='/'
         }
+        
     },
     mounted(){
         axios.get('/apis/api/blog/article/'+this.$route.params.id)
@@ -163,4 +161,9 @@ export default {
     border: 2px dotted #778899;
     margin: 20px 0px 0px 0px;
 }
+.newcomment{
+    margin-top: 20px;
+    font-size: 15px;
+}
+
 </style>

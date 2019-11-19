@@ -22,7 +22,7 @@
                 <button class="newbuttom" @click= "cancelHandler" >清空</button>
             </div>
 
-            <ul v-for= "(item,index) in type"  >
+            <ul v-for= "(item,index) in type" :key="index" value="index" >
                 <li><span class="list">{{ item.name }}</span> 
                     <span class="update" @click= "edithandler(index)">修改</span>
                     <span class="update" @click= "deletehandler(index)">刪除</span>

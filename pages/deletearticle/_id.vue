@@ -12,17 +12,17 @@
             <p><a href="/deletearticle" class="now">刪除文章</a></p>
             <ul>
                 <li class="typelist" @click= "allarticle">全部</li>
-                <li class="typelist" v-for="(type,index) in type" @click= "read(index)">{{ type.name }}</li>
+                <li class="typelist" v-for="(type,index) in type" :key="index" value="index" @click= "read(index)">{{ type.name }}</li>
             </ul>
             <p><a href="/newtype" class="new">新增分類</a> </p>
         </div>
 
-        <div class="sidebar_right" v-for="article in article">
+        <div class="sidebar_right" v-for="(article,index) in article" :key="index" value="index">
 
             <input type="text" class="titlepatch" v-model= "article.title">
             
             <textarea class="contentpatch" cols="100" rows="35" v-model="article.content"></textarea>
-            <button class="submit"> 修改 </button>
+            <button class="submit" @click="submithandler(index)"> 修改 </button>
 
         </div>
         
@@ -39,8 +39,7 @@ export default {
     data(){
         return{
            type:[],
-           article:[]
-           
+           article:[],
         }
     },
     methods:{
@@ -48,6 +47,19 @@ export default {
             this.typename='全部'
             this.edit=null
         },
+        submithandler(index){
+            axios.patch('/apis/api/blog/article/'+this.article[index].article_id,this.article[index])
+            .then((res)=>{
+                if(res.data.status === 'E00002'){
+                    alert(`${res.data.value.title} ${res.data.value.content} ${res.data.value.category_id}`)
+                }
+                else if(res.data.status === '000000'){
+                    alert(`${res.data.value}`)
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }
     },
     mounted(){
         axios.get('/apis/api/blog/category')

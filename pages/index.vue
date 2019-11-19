@@ -7,13 +7,14 @@
     <div class="content">
     <div class="sidebar_left">
         <p class="typetitle">文章分類</p> 
-        <ul  v-for= "(item,index) in type" >
-          <li class="typelist" @click= "read(index)">{{ item.name }}</li>
+        <ul>
+          <li class="typelist" @click= "back">全部分類</li>
+          <li v-for= "(item,index) in type" :key="index" value="index" class="typelist" @click= "read(index)">{{ item.name }}</li>
         </ul>
     </div>
     <div class="sidebar_right">
         <p class="all">所有文章</p>
-        <div v-for="(article,index) in article" class="titlelist">
+        <div v-for="(article,index) in article" :key="index" value="index" class="titlelist">
           <p class="contenttitle" @click= "change(index)">{{ article.title }}</p>
           <p class="artcontent" @click= "change(index)">{{ article .content }}</p>
         </div>
@@ -41,7 +42,10 @@ export default {
         window.location.href='/type/'+this.type[index].category_id
       },
       change(index){
-          window.location.href='/content/'+this.article[index].article_id
+        window.location.href='/content/'+this.article[index].article_id
+      },
+      back(){
+        window.location.href='/'
       }
     },
     mounted(){

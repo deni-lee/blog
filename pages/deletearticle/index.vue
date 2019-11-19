@@ -12,7 +12,7 @@
             <p><a href="/deletearticle" class="now">刪除文章</a></p>
             <ul>
                 <li class="typelist" @click= "allarticle">全部</li>
-                <li class="typelist" v-for="(type,index) in type" @click= "read(index)">{{ type.name }}</li>
+                <li class="typelist" v-for="(type,index) in type" :key="index" value="index" @click= "read(index)">{{ type.name }}</li>
             </ul>
             <p><a href="/newtype" class="new">新增分類</a> </p>
         </div>
@@ -21,12 +21,12 @@
 
             <div style="margin-top: 25px;">
                 <ul> <span class="typename">{{ typename }}</span> 
-                    <li class="articlelist" v-for="(all,index) in all" v-if="edit===null" >
+                    <li class="articlelist" v-for="(all,index) in all" :key="index" value="index" v-if="edit === null" >
                         <button class="delete" @click= "deletehandlerall(index)">刪除</button>
                         <button class="delete" @click= "patchhandlerall(index)">編輯</button>
                         {{ all.title }}
                     </li>
-                    <li class="articlelist" v-for="(article,index) in article">
+                    <li class="articlelist" v-for="(article,index) in article" :key="index" value="index">
                         <button class="delete" @click= "deletehandler(index)">刪除</button>
                         <button class="delete" @click= "patchhandler(index)">編輯</button>
                         {{ article.title }}
