@@ -9,28 +9,25 @@
 
         <div class="sidebar_left">
             <p><a href="/article" class="new">新增文章</a> </p>
-            <p><a href="/newtype" class="new">新增分類</a> </p>
+            <p><a href="/deletearticle" class="new">刪除文章</a></p>
+            <p><a href="/newtype" class="now">新增分類</a> </p>
         </div>
 
         <div class="sidebar_right">
 
             <div>
-                <input type="text" class="newtype" placeholder="新增分類" v-model.trim= "input.name"> <br>
-                <input type="text" class="newtype" placeholder="描述(沒有請填無)" v-model.trim= "input.description">
-                <button class="newbuttom" @click="submit">新增</button>
-                <button class="newbuttom" @click="cancelHandler" >清空</button>
+                <input type="text" class="newtype" placeholder="新增分類" v-model= "input.name"> <br>
+                <input type="text" class="newtype" placeholder="描述(沒有請填無)" v-model= "input.description">
+                <button class="newbuttom" @click= "submit">新增</button>
+                <button class="newbuttom" @click= "cancelHandler" >清空</button>
             </div>
-            
-            <template>
 
-            <ul v-for= "(item,index) in type" :key="item" :item="item" >
+            <ul v-for= "(item,index) in type"  >
                 <li><span class="list">{{ item.name }}</span> 
                     <span class="update" @click= "edithandler(index)">修改</span>
                     <span class="update" @click= "deletehandler(index)">刪除</span>
                 </li>
             </ul>
-
-            </template>
 
         </div>
         
@@ -51,7 +48,7 @@ export default {
                 name:'',
                 description:''
             },
-            edit:null
+            editIndex:null
         }
     },
     methods:{
@@ -64,16 +61,23 @@ export default {
                         this.cancelHandler()
                     }
                     else{
-                        this.type.push(res.data.data)
+                        this.type.push(res.data.value)
                         this.cancelHandler()
                     }
+                }).catch((err)=>{
+                    console.log(err)
                 })
             }else{
                 alert(`確定修改 ${this.type[this.editIndex].name} ?`)
                 axios.patch('/apis/api/blog/category/'+this.type[this.editIndex].category_id,this.input)
                 .then((res)=>{
+                    if(res.data.status === 'E00001'){
+                        alert("儲存失敗 : 字數需大於4於255")
+                        this.cancelHandler()
+                    }else{
                     alert('修改成功')
                     location.reload()
+                    }
                 }).catch((err)=>{
                     console.log(err)
                 })
@@ -107,7 +111,7 @@ export default {
         axios.get('/apis/api/blog/category')
         .then((res)=>{
           if(res.data.status=='000000')
-          this.type=res.data.data            
+          this.type=res.data.value            
         }).catch((err)=>{
             console.log(err)
         })
@@ -181,6 +185,11 @@ li{
 .new:active{
     text-decoration:none;
     color: gray;
+}
+.now{
+    text-decoration:none;
+    font-weight: bold;
+    color: black;
 }
 .newtype{
     width: 200px;

@@ -1,38 +1,35 @@
 <template>
-    <div>
+<div>
     <div class="header">
         <a href="/" class="rcorners">文章列表</a>
         <a href="/article" class="rcorners">文章管理</a>
     </div>
-
+    
     <div class="content">
 
         <div class="sidebar_left">
-            <p><a href="/article" class="now">新增文章</a> </p>
-            <p><a href="/deletearticle" class="new">刪除文章</a></p>
+            <p><a href="/article" class="new">新增文章</a> </p>
+            <p><a href="/deletearticle" class="now">刪除文章</a></p>
+            <ul>
+                <li class="typelist" @click= "allarticle">全部</li>
+                <li class="typelist" v-for="(type,index) in type" @click= "read(index)">{{ type.name }}</li>
+            </ul>
             <p><a href="/newtype" class="new">新增分類</a> </p>
         </div>
 
-        <div class="sidebar_right">
-            <div>
-                <input type="text" class="title" placeholder="標題" v-model= "input.title">
-                
-            <select v-model= "input.category_id">
-                    <option v-for="(item, index) in type" :key="index+2" :value="index+2">{{ item.name }}-{{index+2}}</option>
-                    
-                </select>
-            </div>
+        <div class="sidebar_right" v-for="article in article">
 
-            <div>
-                <textarea cols="100" rows="40" v-model= "input.content"></textarea>
-                <input type="text" class="title" placeholder="備註" v-model= "input.remark">
-                <input type="text" class="title" placeholder="圖片" v-model= "input.image">
-                <button class="submit" @click= "submitHandler">新增</button>
-            </div>
+            <input type="text" class="titlepatch" v-model= "article.title">
             
+            <textarea class="contentpatch" cols="100" rows="35" v-model="article.content"></textarea>
+            <button class="submit"> 修改 </button>
+
         </div>
+        
     </div>
+
 </div>
+
 </template>
 
 <script>
@@ -41,31 +38,16 @@ import axios from 'axios'
 export default {
     data(){
         return{
-            type:[],
-            input:{
-                title:'',
-                image:'',
-                remark:'',
-                category_id:'',
-                content:'',
-            }
+           type:[],
+           article:[]
+           
         }
     },
     methods:{
-        submitHandler(index){
-            // if(!input.article_id || !input.title || !input.content) return
-            axios.post('apis/api/blog/article',this.input)
-            .then((res)=>{
-                if(res.data.status === 'E00002'){
-                    alert(`${res.data.value}`)
-                }else{
-                    alert('新增成功')
-                }
-            }).catch((err)=>{
-                console.log(err)
-            })
+        allarticle(){
+            this.typename='全部'
+            this.edit=null
         },
-        
     },
     mounted(){
         axios.get('/apis/api/blog/category')
@@ -75,6 +57,14 @@ export default {
         }).catch((err)=>{
             console.log(err)
         })
+        axios.get('/apis/api/blog/article/'+this.$route.params.id)
+        .then((res)=>{
+          if(res.data.status=='000000')
+          this.article=res.data.value            
+        }).catch((err)=>{
+            console.log(err)
+        })
+        
     }
 }
 </script>
@@ -90,14 +80,14 @@ export default {
     position:relative;
     width: 200px;
     float: left;
-   
+      
 }
 
 .sidebar_right {
     position: relative;
     width: 500px;
     float: right;
-   
+    margin: 30px 0px 0px 0px;
 }
 
 .content {
@@ -126,11 +116,19 @@ p{
     padding: 5px;
     margin: 5px;
 }
-li{
-    list-style:none;
-    background-color: antiquewhite;
-    margin: 20px;
-    padding: 20px;
+.typelist{
+    list-style: none;
+    color: #666666;
+    font-size: 15px;
+    padding: 3px;
+    cursor: pointer;
+}
+.typelist:hover{
+    list-style: none;
+    color: black;
+    font-size: 15px;
+    padding: 3px;
+    cursor: pointer;
 }
 .new{
     text-decoration:none;
@@ -145,35 +143,28 @@ li{
     font-weight: bold;
     color: black;
 }
-.title{
-    width: 200px;
+.titlepatch{
+    width: 500px;
     height: 40px;
-    margin: 20px;
+    font-size: 20px;
+    margin: 10px;
 }
-.write{
-    width: 900px;
-    height: 700px;
-    vertical-align:text-top;   
-}
-.write::placeholder{
-    text-align: center;
-}
-.type{
-    width: 100px;
-    height: 40px;
+.contentpatch{
+    margin: 10px;
+    font-size: 15px;
 }
 .submit{
+    float: left;
+    border-radius: 15%;
     margin: 10px;
     z-index: 1;
-    font-size: inherit;
+    font-size: 15px;
     font-family: inherit;
     color: white;
     padding: 0.5em 1em;
     outline: none;
     border: none;
-    background-color: #444444 ;
-    float: left;
-}
+    background-color: #666666 ;}
 .submit:active{
     cursor: pointer;
     animation: jelly 0.5s;
