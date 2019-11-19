@@ -68,22 +68,26 @@ export default {
             })
         },
         deletehandler(index){
-                alert(`確定刪除 ${this.article[index].title}`)
-                axios.delete('/apis/api/blog/article/'+ this.article[index].article_id)
-                .then((res)=>{
-                    if(res.data.status === 'E00002'){
-                        this.errorbox=res.data.value
-                        alert(`${this.errorbox}`)
-                    }else if(res.data.status === '000000'){
-                        alert(`刪除成功`)
-                        location.reload()
-                    }
-                }).catch((err)=>{
-                    console.log(err)
-                })
+                let result = confirm(`確定刪除 ${this.article[index].title}`)
+                if(result){
+                    axios.delete('/apis/api/blog/article/'+ this.article[index].article_id)
+                    .then((res)=>{
+                        if(res.data.status === 'E00002'){
+                            this.errorbox=res.data.value
+                            alert(`${this.errorbox}`)
+                        }else if(res.data.status === '000000'){
+                            alert(`刪除成功`)
+                            location.reload()
+                        }
+                    }).catch((err)=>{
+                        console.log(err)
+                    })
+                }else{
+                    return
+                }
         },
         deletehandlerall(index){
-                alert(`確定刪除 ${this.article[index].title}`)
+                alert(`確定刪除 ${this.all[index].title}`)
                 axios.delete('/apis/api/blog/article/'+ this.all[index].article_id)
                 .then((res)=>{
                     if(res.data.status === 'E00002'){

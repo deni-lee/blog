@@ -18,13 +18,14 @@
                 <input type="text" class="title" placeholder="標題" v-model= "input.title">
                 
             <select v-model= "input.category_id">
-                    <option v-for="(item, index) in type" :key="index+2" :value="index+2">{{ item.name }}</option>
+                
+                <option v-for="(item, index) in type" :key="index+2" :value="index+2" >{{ item.name }}</option>
                     
-                </select>
+            </select>
             </div>
 
             <div>
-                <textarea cols="100" rows="40" v-model= "input.content"></textarea>
+                <textarea cols="100" rows="40" v-model= "input.content" placeholder="文章內容..."></textarea>
                 <input type="text" class="title" placeholder="備註" v-model= "input.remark">
                 <input type="text" class="title" placeholder="圖片" v-model= "input.image">
                 <button class="submit" @click= "submitHandler">新增</button>
