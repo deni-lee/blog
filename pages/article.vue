@@ -27,7 +27,7 @@
             <div>
                 <textarea cols="100" rows="40" v-model= "input.content" placeholder="文章內容..."></textarea>
                 <input type="text" class="title" placeholder="備註" v-model= "input.remark">
-                <input type="text" class="title" placeholder="圖片" v-model= "input.image">
+                <input type="file" name= "file"ref= "file" @change= "handleFileUpload" >
                 <button class="submit" @click= "submitHandler">新增</button>
             </div>
             
@@ -49,7 +49,8 @@ export default {
                 remark:'',
                 category_id:'',
                 content:'',
-            }
+            },
+            image:''
         }
     },
     methods:{
@@ -62,6 +63,7 @@ export default {
                 }else{
                     alert('新增成功')
                     this.clear()
+                    console.log(res)
                 }
             }).catch((err)=>{
                 console.log(err)
@@ -73,6 +75,10 @@ export default {
             this.input.remark='',
             this.input.category_id='',
             this.input.content=''
+        },
+        handleFileUpload(e){
+            this.image=this.$refs.file.files[0]
+            console.log(this.image)
         }
         
     },

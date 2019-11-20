@@ -84,14 +84,19 @@ export default {
             }
         },
         deletehandler(index){
-            alert(`確定刪除 ${this.type[index].name} ?`)
-            axios.delete('/apis/api/blog/category/'+this.type[index].category_id)
+            let result =confirm(`確定刪除 ${this.type[index].name} ?`)
+            if(result){
+                axios.delete('/apis/api/blog/category/'+this.type[index].category_id)
             .then((res)=>{
                 alert('刪除成功')
                 location.reload()
             }).catch((err)=>{
                 console.log(err)
             })
+            }else{
+                return
+            }
+            
         },
         cancelHandler() {
             this.editIndex = null

@@ -20,6 +20,7 @@
                 <div v-for="(item,index) in content" :key="index" value="index">
                     <p class="title" >{{ item.title }}</p> <br>
                     <p class="articlecontent" >{{ item.content }}</p>
+                    <img :src="item.image">
                 </div>
 
                 <div style="margin-top:30px; ">
@@ -76,6 +77,7 @@ export default {
         axios.get('/apis/api/blog/article/'+this.$route.params.id)
         .then((res)=>{
             this.content=res.data.value
+            // console.log(res)
         }).catch((err)=>{
             console.log(err)
         })
