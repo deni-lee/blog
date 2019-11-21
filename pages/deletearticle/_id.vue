@@ -12,12 +12,12 @@
             <input type="text" class="titlepatch" v-model= "article.title">
 
             <textarea class="contentpatch" cols="100" rows="35" v-model="article.content"></textarea> <br>
-            <textarea class="contentpatch" cols="30" rows="2" v-model="article.image"></textarea>
+            <img :src=" 'http://192.168.14.42:9990' + article.image ">
+            <input type="file" name= "image" ref="image" @change= "handleFileUpload" >
             <textarea class="contentpatch" cols="30" rows="2" v-model="article.remark"></textarea>
             
             <button class="submit" @click="submithandler(index)"> 修改 </button>
             <button class="submit" @click="back"> 返回 </button>
-
         </div>
         
     </div>
@@ -34,6 +34,7 @@ export default {
         return{
            type:[],
            article:[],
+           image:''
         }
     },
     methods:{
@@ -42,10 +43,20 @@ export default {
             this.edit=null
         },
         submithandler(index){
-            axios.patch('/apis/api/blog/article/'+this.article[index].article_id,this.article[index])
+            let formData = new FormData();
+            formData.append('image',this.image);
+
+            axios.patch('/apis/api/blog/article/'+this.article[index].article_id.image,formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }
+            )
             .then((res)=>{
                 if(res.data.status === 'E00002'){
                     alert(`${res.data.value.title} ${res.data.value.content} ${res.data.value.category_id}`)
+                    console.log(res)
                 }
                 else if(res.data.status === '000000'){
                     alert(`${res.data.value}`)
@@ -56,6 +67,9 @@ export default {
         },
         back(){
             window.history.back();
+        },handleFileUpload(e){
+            this.image=this.$refs.image[0].files[0]
+            console.log(this.image)
         }
     },
     mounted(){

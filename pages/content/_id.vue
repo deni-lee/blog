@@ -18,9 +18,9 @@
 
             <div class="sidebar_right">
                 <div v-for="(item,index) in content" :key="index" value="index">
-                    <p class="title" >{{ item.title }}</p> <br>
+                    <p class="title" >{{ item.title }} </p> <br>
                     <p class="articlecontent" >{{ item.content }}</p>
-                    <img :src="item.image">
+                    <img :src=" 'http://192.168.14.42:9990' + item.image " class="imgstyle">
                 </div>
 
                 <div style="margin-top:30px; ">
@@ -214,5 +214,9 @@ export default {
     75% {
         transform: scale(0.95, 1.05);
     }
+}
+.imgstyle{
+    width: 500px;
+    margin-top: 30px;
 }
 </style>

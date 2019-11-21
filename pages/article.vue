@@ -27,9 +27,11 @@
             <div>
                 <textarea cols="100" rows="40" v-model= "input.content" placeholder="文章內容..."></textarea>
                 <input type="text" class="title" placeholder="備註" v-model= "input.remark">
-                <input type="file" name= "file"ref= "file" @change= "handleFileUpload" >
+                <input type="file" name= "image" ref="image" @change= "handleFileUpload" >
                 <button class="submit" @click= "submitHandler">新增</button>
             </div>
+
+            
             
         </div>
     </div>
@@ -49,17 +51,38 @@ export default {
                 remark:'',
                 category_id:'',
                 content:'',
-            },
-            image:''
+            }
         }
     },
     methods:{
         submitHandler(index){
-            // if(!input.article_id || !input.title || !input.content) return
-            axios.post('apis/api/blog/article',this.input)
+            // axios({
+            //     method:"post",
+            //     url:"/apis/api/blog/article",
+            //     data:{
+            //         name:this.name,
+            //         password:this.password
+            //     }
+            // }).then((res)=>{
+            //     console.log(res.data);
+            // })
+            let formData = new FormData();
+            formData.append('title',this.input.title);
+            formData.append('image', this.input.image);
+            formData.append('remark', this.input.remark);
+            formData.append('category_id', this.input.category_id);
+            formData.append('content', this.input.content);
+
+            axios.post('apis/api/blog/article',formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
             .then((res)=>{
                 if(res.data.status === 'E00002'){
                     alert(`${res.data.value}`)
+                    console.log(res)
                 }else{
                     alert('新增成功')
                     this.clear()
@@ -77,8 +100,8 @@ export default {
             this.input.content=''
         },
         handleFileUpload(e){
-            this.image=this.$refs.file.files[0]
-            console.log(this.image)
+            this.input.image=this.$refs.image.files[0]
+            console.log(this.input.image)
         }
         
     },
