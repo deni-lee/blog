@@ -1,20 +1,20 @@
 <template>
 <div>
     <div class="header">
-        <a href="/" class="rcorners">文章列表</a>
-        <a href="/article" class="rcorners">文章管理</a>
+        <a href="/loging" class="rcorners">文章列表</a>
+        <a href="/loging/article" class="rcorners">文章管理</a>
     </div>
     
     <div class="content">
 
         <div class="sidebar_left">
-            <p><a href="/article" class="new">新增文章</a> </p>
-            <p><a href="/deletearticle" class="now">文章編輯</a></p>
+            <p><a href="/loging/article" class="new">新增文章</a> </p>
+            <p><a href="/loging/deletearticle" class="now">文章編輯</a></p>
             <ul>
                 <li class="typelist" @click= "allarticle">全部</li>
                 <li class="typelist" v-for="(type,index) in type" :key="index" value="index" @click= "read(index)">{{ type.name }}</li>
             </ul>
-            <p><a href="/newtype" class="new">新增分類</a> </p>
+            <p><a href="/loging/newtype" class="new">新增分類</a> </p>
         </div>
 
         <div class="sidebar_right">

@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="header">
-        <p class="rcorners">文章列表</p>
+        <a href="/loging" class="rcorners">文章列表</a>
+        <a href="/loging/article" class="rcorners">文章管理</a>
     </div>
     <div class="content">
     <div class="sidebar_left">
@@ -38,13 +39,13 @@ export default {
     },
     methods:{
       read(index){
-        window.location.href='/type/'+this.type[index].category_id
+        window.location.href='/loging/type/'+this.type[index].category_id
       },
       change(index){
-        window.location.href='/content/'+this.article[index].article_id
+        window.location.href='/loging/content/'+this.article[index].article_id
       },
       back(){
-        window.location.href='/'
+        window.location.href='/loging'
       }
     },
     mounted(){
@@ -73,10 +74,7 @@ export default {
   text-align: center;
   padding: 25px;
 }
-.rcorners{
-    font-size: 20px;
-    color: gray;
-}
+
 .sidebar_left {
   position:relative;
   width: 200px;
@@ -95,6 +93,24 @@ export default {
   margin-left: 450px;
   margin-right: 450px;
   text-align: center;
+}
+
+.rcorners {
+  text-decoration:none;
+  font-size: 20px;
+  color: gray;
+  margin: 50px;
+  padding: 15px;
+  transition: all 1s;
+
+}
+.rcorners:hover{
+  text-decoration:none;
+  border-radius: 15px;
+  color: white;
+  background-color: gray;
+  margin: 50px;
+  padding: 15px;
 }
 .typetitle{
   margin: 15px;

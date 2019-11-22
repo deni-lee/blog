@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "cookie-universal-nuxt": "^2.0.19",
     "jquery": "^3.4.1",
     "nuxt": "^2.0.0"
   },

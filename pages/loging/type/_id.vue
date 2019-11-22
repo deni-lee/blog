@@ -1,18 +1,19 @@
 <template>
   <div>
     <div class="header">
-        <p class="rcorners">文章列表</p>
+        <a href="/loging" class="rcorners">文章列表</a>
+        <a href="/loging/article" class="rcorners">文章管理</a>
     </div>
     <div class="content">
     <div class="sidebar_left">
         <p class="typetitle">文章分類</p> 
-        <ul>
+        <ul >
           <li class="typelist" @click= "back">全部分類</li>
           <li v-for= "(item,index) in type" :key="index" value="index" class="typelist" @click= "read(index)">{{ item.name }}</li>
         </ul>
     </div>
     <div class="sidebar_right">
-        <p class="all">所有文章</p>
+        
         <div v-for="(article,index) in article" :key="index" value="index" class="titlelist">
           <p class="contenttitle" @click= "change(index)">{{ article.title }}</p>
           <p class="artcontent" @click= "change(index)">{{ article .content }}</p>
@@ -37,14 +38,14 @@ export default {
       }
     },
     methods:{
-      read(index){
-        window.location.href='/type/'+this.type[index].category_id
-      },
       change(index){
-        window.location.href='/content/'+this.article[index].article_id
+        window.location.href='/loging/content/'+this.article[index].article_id
+      },
+      read(index){
+        window.location.href='/loging/type/'+this.type[index].category_id
       },
       back(){
-        window.location.href='/'
+        window.location.href='/loging'
       }
     },
     mounted(){
@@ -55,9 +56,10 @@ export default {
         }).catch((err)=>{
             console.log(err)
         })
-        axios.get('/apis/api/blog/article')
+        axios.get('/apis/api/blog/category/'+ this.$route.params.id +'/article')
         .then((res)=>{
-          this.article=res.data.value
+          if(res.data.status=='000000')
+          this.article=res.data.data
         }).catch((err)=>{
           console.log(err)
         })
@@ -73,10 +75,7 @@ export default {
   text-align: center;
   padding: 25px;
 }
-.rcorners{
-    font-size: 20px;
-    color: gray;
-}
+
 .sidebar_left {
   position:relative;
   width: 200px;
@@ -95,6 +94,24 @@ export default {
   margin-left: 450px;
   margin-right: 450px;
   text-align: center;
+}
+
+.rcorners {
+  text-decoration:none;
+  font-size: 20px;
+  color: gray;
+  margin: 50px;
+  padding: 15px;
+  transition: all 1s;
+
+}
+.rcorners:hover{
+  text-decoration:none;
+  border-radius: 15px;
+  color: white;
+  background-color: gray;
+  margin: 50px;
+  padding: 15px;
 }
 .typetitle{
   margin: 15px;
@@ -135,10 +152,5 @@ export default {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.all{
-  margin: 20px 0px 0px 20px;
-  text-align: left;
-  font-weight:bold;
-  font-size: 30px;
-}
+
 </style>

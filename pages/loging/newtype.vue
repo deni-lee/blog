@@ -1,16 +1,16 @@
 <template>
 <div>
     <div class="header">
-        <a href="/" class="rcorners">文章列表</a>
-        <a href="/article" class="rcorners">文章管理</a>
+        <a href="/loging" class="rcorners">文章列表</a>
+        <a href="/loging/article" class="rcorners">文章管理</a>
     </div>
     
     <div class="content">
 
         <div class="sidebar_left">
-            <p><a href="/article" class="new">新增文章</a> </p>
-            <p><a href="/deletearticle" class="new">文章編輯</a></p>
-            <p><a href="/newtype" class="now">新增分類</a> </p>
+            <p><a href="/loging/article" class="new">新增文章</a> </p>
+            <p><a href="/loging/deletearticle" class="new">文章編輯</a></p>
+            <p><a href="/loging/newtype" class="now">新增分類</a> </p>
         </div>
 
         <div class="sidebar_right">

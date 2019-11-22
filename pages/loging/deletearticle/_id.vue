@@ -1,8 +1,8 @@
 <template>
 <div>
     <div class="header">
-        <a href="/" class="rcorners">文章列表</a>
-        <a href="/article" class="rcorners">文章管理</a>
+        <a href="/loging" class="rcorners">文章列表</a>
+        <a href="/loging/article" class="rcorners">文章管理</a>
     </div>
     
     <div class="content">

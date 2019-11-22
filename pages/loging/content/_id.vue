@@ -2,7 +2,8 @@
     <div>
 
         <div class="header">
-        <p class="rcorners">文章列表</p>
+        <a href="/loging" class="rcorners">文章列表</a>
+        <a href="/loging/article" class="rcorners">文章管理</a>
         </div>
 
         <div class="content">
@@ -121,9 +122,22 @@ export default {
     text-align: center;
 }
 
-.rcorners{
+.rcorners {
+    text-decoration:none;
     font-size: 20px;
     color: gray;
+    margin: 50px;
+    padding: 15px;
+    transition: all 1s;
+
+}
+.rcorners:hover{
+    text-decoration:none;
+    border-radius: 15px;
+    color: white;
+    background-color: gray;
+    margin: 50px;
+    padding: 15px;
 }
 .typetitle{
   margin: 15px;
