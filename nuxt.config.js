@@ -15,6 +15,9 @@ export default {
         ],
         script: [{
             src: 'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js'
+        }],
+        script: [{
+            src: "https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"
         }]
     },
     /*
@@ -39,6 +42,7 @@ export default {
     modules: [
         // Doc: https://axios.nuxtjs.org/usage
         '@nuxtjs/axios',
+        'nuxt-vuex-localstorage'
     ],
     /*
      ** Axios module configuration

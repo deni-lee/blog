@@ -38,6 +38,7 @@ export default {
             .then((res)=>{
                 if(res.data.status==='000000'){
                     alert(`${res.data.meassage}`)
+                    window.location.href='/login'
                 }else if(res.data.status==='E00002'){
                     alert(`${res.data.meassage}`)
                 }

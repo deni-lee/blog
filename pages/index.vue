@@ -52,7 +52,7 @@ export default {
     mounted(){
       console.log(this.$store.state.token)
         if(this.$store.state.token!=''){
-          window.location.href='/errror'
+          window.location.href='/error'
         }
         axios.get('/apis/api/blog/category')
         .then((res)=>{
