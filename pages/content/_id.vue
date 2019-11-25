@@ -2,7 +2,9 @@
     <div>
 
         <div class="header">
-        <p class="rcorners">文章列表</p>
+            <span class="rcorners">文章列表</span>
+            <a href="/login" class="login">登入</a>
+            <a href="/registered" class="login">註冊</a>
         </div>
 
         <div class="content">
@@ -120,10 +122,30 @@ export default {
     margin-right: 450px;
     text-align: center;
 }
-
 .rcorners{
-    font-size: 20px;
-    color: gray;
+  font-size: 20px;
+  color: white;
+  margin: 15px;
+  background-color: gray;
+  border-radius: 15px;
+  padding: 15px;
+}
+.login {
+  text-decoration:none;
+  font-size: 20px;
+  color: gray;
+  margin: 15px;
+  padding: 15px;
+  transition: all 1s;
+
+}
+.login:hover{
+  text-decoration:none;
+  border-radius: 15px;
+  color: white;
+  background-color: gray;
+  margin: 15px;
+  padding: 15px;
 }
 .typetitle{
   margin: 15px;

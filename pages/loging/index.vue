@@ -34,7 +34,7 @@ export default {
     data(){
       return{
         type:[],
-        article:[]
+        article:[],
       }
     },
     methods:{
@@ -49,6 +49,9 @@ export default {
       }
     },
     mounted(){
+        if(this.$store.state.token=''){
+          window.location.href='/error'
+        }
         axios.get('/apis/api/blog/category')
         .then((res)=>{
           if(res.data.status=='000000')
