@@ -44,6 +44,7 @@
 
 <script>
 import axios from 'axios'
+import nuxtStorage from 'nuxt-storage'
 
 export default {
     data(){
@@ -105,13 +106,17 @@ export default {
             this.edit=null
         },
         patchhandler(index){
-            window.location.href='/deletearticle/'+this.article[index].article_id
+            window.location.href='/loging/deletearticle/'+this.article[index].article_id
         },
         patchhandlerall(index){
-            window.location.href='/deletearticle/'+this.all[index].article_id
+            window.location.href='/loging/deletearticle/'+this.all[index].article_id
         }
     },
     mounted(){
+        let token=nuxtStorage.localStorage.getData('token')      
+        if(token===""){
+          window.location.href='/error'
+        }
         axios.get('/apis/api/blog/category')
         .then((res)=>{
           if(res.data.status=='000000')

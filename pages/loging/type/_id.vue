@@ -29,6 +29,7 @@
 
 <script>
 import axios from 'axios'
+import nuxtStorage from 'nuxt-storage'
 
 export default {
     data(){
@@ -49,6 +50,10 @@ export default {
       }
     },
     mounted(){
+      let token=nuxtStorage.localStorage.getData('token')      
+        if(token===""){
+          window.location.href='/error'
+        }
         axios.get('/apis/api/blog/category')
         .then((res)=>{
           if(res.data.status=='000000')

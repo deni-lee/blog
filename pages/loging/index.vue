@@ -3,6 +3,7 @@
     <div class="header">
         <a href="/loging" class="rcorners">文章列表</a>
         <a href="/loging/article" class="rcorners">文章管理</a>
+        <span class="rcorners" @click="logout">登出</span>
     </div>
     <div class="content">
     <div class="sidebar_left">
@@ -36,6 +37,7 @@ export default {
       return{
         type:[],
         article:[],
+        api_token:nuxtStorage.localStorage.getData('token')
       }
     },
     methods:{
@@ -47,6 +49,16 @@ export default {
       },
       back(){
         window.location.href='/loging'
+      },
+      logout(){
+        // // let api_token=nuxtStorage.localStorage.getData('token')
+        console.log(this.api_token)
+        axios.post('/apis/api/blog/logout',this.api_token        )
+        .then((res)=>{
+          console.log(res)
+        }).catch((err)=>{
+          console.log(err)
+        })
       }
     },
     mounted(){  

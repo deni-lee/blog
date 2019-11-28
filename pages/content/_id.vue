@@ -26,8 +26,6 @@
 
                 <div style="margin-top:30px; ">
                     <p class="Commenttitle">評論</p>
-                        <textarea cols="50" rows="4" placeholder="新增評論" class="newcomment" v-model= "input.content"></textarea>
-                        <button class="commentsubmit" @click= "commentsubmit">送出</button>
                         <p class="comment" v-for="(comment,index) in comment" :key="index" value="index">{{ comment.content }}</p>
                 </div>
             </div>
@@ -45,11 +43,6 @@ export default {
             type:[],
             comment:[],
             article:[],
-            input:{
-                content:'',
-                article_id:this.$route.params.id,
-                user_id:'1'
-            }
         }
     },
     methods:{
@@ -59,20 +52,6 @@ export default {
         back(){
             window.location.href='/'
         },
-        commentsubmit(){
-            axios.post('/apis/api/blog/comment',this.input)
-            .then((res)=>{
-                if(res.data.status === 'E00002'){
-                    alert(`${res.data.value}`)
-                }else if(res.data.status === '000000'){
-                    alert(`新增成功`)
-                    location.reload()
-                }
-                console.log(res)
-            }).catch((err)=>{
-                console.log(err)
-            })
-        }
     },
     mounted(){
         axios.get('/apis/api/blog/article/'+this.$route.params.id)
@@ -194,19 +173,6 @@ export default {
 .newcomment{
     margin-top: 20px;
     font-size: 15px;
-}
-.commentsubmit{
-    margin: 10px;
-    z-index: 1;
-    font-size: 10px;
-    font-family: inherit;
-    color: white;
-    padding: 0.5em 1em;
-    outline: none;
-    border: none;
-    background-color: #708090 ;}
-.commentsubmit:active{
-    animation: jelly 0.5s;
 }
 @keyframes jelly {
     0%,

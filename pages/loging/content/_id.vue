@@ -37,6 +37,8 @@
 
 <script>
 import axios from 'axios'
+import nuxtStorage from 'nuxt-storage'
+
 export default {
     data(){
         return{
@@ -74,6 +76,10 @@ export default {
         }
     },
     mounted(){
+        let token=nuxtStorage.localStorage.getData('token')      
+        if(token===""){
+          window.location.href='/error'
+        }
         axios.get('/apis/api/blog/article/'+this.$route.params.id)
         .then((res)=>{
             this.content=res.data.value

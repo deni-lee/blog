@@ -3,6 +3,7 @@
     <div class="header">
         <a href="/loging" class="rcorners">文章列表</a>
         <a href="/loging/article" class="rcorners">文章管理</a>
+        <span class="rcorners" @click="logout">登出</span>
     </div>
 
     <div class="content">
@@ -40,6 +41,7 @@
 
 <script>
 import axios from 'axios'
+import nuxtStorage from 'nuxt-storage'
 
 export default {
     data(){
@@ -102,10 +104,24 @@ export default {
         handleFileUpload(e){
             this.input.image=this.$refs.image.files[0]
             console.log(this.input.image)
+        },
+        logout(){
+            let api_token=nuxtStorage.localStorage.getData('token')
+            console.log(api_token)
+            axios.post('/apis/api/blog/logout',api_token)
+            .then((res)=>{
+            console.log(res)
+            }).catch((err)=>{
+            console.log(err)
+            })
         }
         
     },
     mounted(){
+        let token=nuxtStorage.localStorage.getData('token')      
+        if(token===""){
+          window.location.href='/error'
+        }
         axios.get('/apis/api/blog/category')
         .then((res)=>{
           if(res.data.status=='000000')

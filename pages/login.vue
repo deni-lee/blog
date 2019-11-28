@@ -10,7 +10,7 @@
             <div class="logintitle">登入</div>  
             <div>
                 <input class="logininput" type="text" placeholder="帳號" v-model="input.name"> <br>
-                <input class="logininput" type="text" placeholder="密碼" v-model="input.password">
+                <input class="logininput" type="password" placeholder="密碼" v-model="input.password">
             </div> 
             <button @click="login">確認</button>         
         </div>
@@ -20,6 +20,8 @@
 
 <script>
 import axios from 'axios'
+import nuxtStorage from 'nuxt-storage'
+
 
 export default {
     data(){
@@ -28,7 +30,6 @@ export default {
                 name:'',
                 password:''
             },
-            token:''
         }
     },
     methods:{
@@ -57,6 +58,12 @@ export default {
             this.input.password=''
         }
     },
+    mounted(){
+    //   let token=nuxtStorage.localStorage.getData('token')      
+    //     if(token!==""){
+    //       window.location.href='/error'
+    //     }
+    }
 }
 </script>
 

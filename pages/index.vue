@@ -30,12 +30,13 @@
 
 <script>
 import axios from 'axios'
+import nuxtStorage from 'nuxt-storage'
 
 export default {
     data(){
       return{
         type:[],
-        article:[]
+        article:[],
       }
     },
     methods:{
@@ -50,8 +51,8 @@ export default {
       }
     },
     mounted(){
-      console.log(this.$store.state.token)
-        if(this.$store.state.token!=''){
+      let token=nuxtStorage.localStorage.getData('token')      
+        if(token!==""){
           window.location.href='/error'
         }
         axios.get('/apis/api/blog/category')
