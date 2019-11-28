@@ -53,8 +53,21 @@ export default {
       logout(){
         // // let api_token=nuxtStorage.localStorage.getData('token')
         console.log(this.api_token)
-        axios.post('/apis/api/blog/logout',this.api_token        )
+
+         let formData = new FormData();
+            formData.append('api_token',this.api_token);
+
+        axios.post('/apis/api/blog/logout',formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
         .then((res)=>{
+          this.token=res.data.value
+          this.$store.commit('loginvuex', this.token)
+          alert(` ${res.data.meassage} `)
+          window.location.href='/'
           console.log(res)
         }).catch((err)=>{
           console.log(err)
